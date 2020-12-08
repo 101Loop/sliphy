@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block nav %}
+    {% include "home/../nav.html" %}
+{% endblock nav %}
+
+{% block content %}
+    <div class="flex p-6 container mx-auto">
+        <li>{{ company.company_name }}</li><br/>
+        <li>{{ company.company_mobile }}</li><br/>
+        <li>{{ company.company_website_url }}</li>
+        <li>{{ company.company_address }}</li>
+        <li>{{ company.company_logo }}</li>
+        <li>{{ company.is_active }}</li>
+    </div>
+{% endblock content %}

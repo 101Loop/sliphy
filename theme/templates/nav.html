@@ -1,0 +1,34 @@
+{% load static %}
+
+<nav class="flex justify-between p-6 container mx-auto sm:h-16 items-center print-hide">
+  <div class="w-full max-w-6xl relative mx-auto px-6">
+    <div class="py-2 flex flex-col sm:flex-row sm:items-center">
+      <a href="{% url "home:home_page" %}" class="block py-1 flex items-center justify-center">
+        <img class="h-10 w-10 mr-2" src="{% static "home/logo.svg" %}" alt="Sliphy">
+        <h1 class="text-lg uppercase tracking-wider font-thin">Sliphy</h1>
+      </a>
+      <div class="flex-grow"></div>
+
+      <div class="flex flex-row justify-around py-2">
+        {% if user.is_authenticated %}
+            <form class="inline" method="POST" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                <button class="mx-1 hover:underline" type="submit">Log Out</button>
+            </form>
+          {% if return_to_app %}
+            <div>
+              <a class="hover:underline font-light" href="{% url 'users:detail' user.username %}">Return to App</a>
+            </div>
+          {% endif %}
+        {% else %}
+          <div class="px-3">
+            <a class="hover:underline font-light" href="{% url 'account_login' %}">Log In</a>
+          </div>
+          <div>
+            <a class="hover:underline font-light" href="{% url 'account_signup' %}">Register</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>

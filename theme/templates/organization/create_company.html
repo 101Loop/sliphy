@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load tailwind_filters %}
+
+{% block content %}
+    <div>
+        <div class="px-32 py-10 items-center justify-center">
+            <div class="mt-5 md:mt-0 md:col-span-2">
+                <form action="{% url 'organization:create-company' %}" method="POST">
+                    {% csrf_token %}
+                    {% if form.non_field_errors %}
+                    <div class="border border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                      <ul>
+                        {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    {% endif %}
+                    <div class="shadow sm:rounded-md sm:overflow-hidden">
+                        <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+                            <div class="grid grid-cols-3 gap-6">
+                                <div class="col-span-3 sm:col-span-2">
+                                    <label for="id_company_name" class="block text-sm font-medium text-gray-700">
+                                        {{ form.company_name.label }}
+                                    </label>
+                                    <div class="mt-1 flex rounded-md border-gray-300">
+                                        <input id="id_company_name" type="text" name="company_name"
+                                               class="textinput w-full appearance-none py-2 focus:outline-none block text-gray-700 rounded-lg bg-white border-gray-300 px-4 border leading-normal"
+
+                                               placeholder="Sliphy">
+                                    </div>
+                                    <span class="text-red-700">{{ form.company_name.errors }}</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-6">
+                                <div class="col-span-3 sm:col-span-2">
+                                    <label for="id_company_mobile" class="block text-sm font-medium text-gray-700">
+                                        {{ form.company_mobile.label }}
+                                    </label>
+                                    <div class="mt-1 flex rounded-md border-gray-300">
+                                        <input id="id_company_mobile" type="text" name="company_mobile"
+                                               class="textinput w-full appearance-none py-2 focus:outline-none block text-gray-700 rounded-lg bg-white border-gray-300 px-4 border leading-normal"
+
+                                               placeholder="8800880088">
+                                    </div>
+                                    <span class="text-red-700">{{ form.company_mobile.errors }}</span>
+
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-6">
+                                <div class="col-span-3 sm:col-span-2">
+                                    <label for="id_company_website_url" class="block text-sm font-medium text-gray-700">
+                                        {{ form.company_website_url.label }}
+                                    </label>
+                                    <div class="mt-1 flex rounded-md border-gray-300">
+                                        <input id="id_company_website_url" type="url" name="company_website_url"
+                                               class="textinput w-full appearance-none py-2 focus:outline-none block text-gray-700 rounded-lg bg-white border-gray-300 px-4 border leading-normal"
+
+                                               placeholder="https://example.com">
+                                    </div>
+                                    <span class="text-red-700">{{ form.company_website_url.errors }}</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-6">
+                                <div class="col-span-3 sm:col-span-2">
+                                    <label for="id_company_address" class="block text-sm font-medium text-gray-700">
+                                        {{ form.company_address.label }}
+                                    </label>
+                                    <div class="mt-1 flex rounded-md border-gray-300">
+                                        <textarea id="id_company_address" name="company_address" rows="3"
+                                                  class="textinput w-full appearance-none py-2 focus:outline-none block text-gray-700 rounded-lg bg-white border-gray-300 px-4 border leading-normal"
+
+                                                  placeholder="India"></textarea>
+                                    </div>
+                                    <span class="text-red-700">{{ form.company_address.errors }}</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="id_company_logo" class="block text-sm font-medium text-gray-700">
+                                    {{ form.company_logo.label }}
+                                </label>
+                                <div class="mt-1 flex rounded-md border-gray-300">
+                                        <input id="id_company_logo" name="company_logo" type="file" accept="image/*"
+                                                  class="appearance-none py-2 focus:outline-none block text-gray-700 rounded-lg bg-white border-gray-300 px-4 border leading-normal"
+
+                                                  placeholder="Upload your company logo"/>
+                                    </div>
+                                <span class="text-red-700">{{ form.company_logo.errors }}</span>
+                            </div>
+                        </div>
+                        <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                            <button type="submit"
+                                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

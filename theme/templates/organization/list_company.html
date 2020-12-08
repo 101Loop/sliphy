@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load i18n static%}
+
+{% block nav %}
+    {% include 'home/../nav.html' %}
+{% endblock nav %}
+
+{% block content %}
+    <div class="flex items-center p-6 container mx-auto">
+        <ul>
+            <!-- Iterate over object_list -->
+            {% for company in companies %}
+            <!-- Display Objects -->
+                <a href="{% url 'organization:detail-company' company.pk %}" class="underline">{{ company.company_name }}</a>
+        {#    <li>{{ company.company_mobile }}</li>#}
+        {#    <li>{{ company.company_website_url }}</li>#}
+        {#    <li>{{ company.company_address }}</li>#}
+        {#    <li>{{ company.company_logo }}</li>#}
+        {#    <li>{{ company.is_active }}</li>#}
+            <hr/>
+            <!-- If objet_list is empty  -->
+            {% empty %}
+            <li>No objects yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock content %}

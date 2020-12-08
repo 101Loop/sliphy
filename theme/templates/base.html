@@ -1,0 +1,55 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Sliphy{% endblock title %}</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Sumit Singh">
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% block css %}
+    {% endblock css %}
+</head>
+
+<body class="min-h-screen flex flex-col bg-gray-300">
+    <!-- nav -->
+    {% block navigation %}
+        {% include "nav.html" %}
+    {% endblock %}
+
+    <main class="{% block main_css_classes %}container mx-auto p-2 flex-grow print-no-max-width{% endblock %}">
+        {% if messages %}
+        <div class="bg-teal-100 border border-teal-400 text-teal-700 px-4 py-3 rounded relative" role="alert">
+            <span class="block sm:inline">
+                {% for message in messages %}
+                    {% block message_block %}
+                    {% blocktrans %}{{ message }}{% endblocktrans %}
+                    {% endblock %}
+                {% endfor %}
+            </span>
+        </div>
+        {% endif %}
+
+        <!-- main content -->
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="container mx-auto {% block footer_css_border %}border-t border-gray-400{% endblock %} p-4 text-center text-sm text-gray-600 print-hide">
+        <span class="mx-1">&copy; {% now "Y" %}
+          <a href="{% url "home:home_page" %}" class="hover:text-gray-900">Sliphy</a>
+        </span>
+        <a href="#" class="mx-1 hover:text-gray-900">About</a>
+        <a href="#" class="mx-1 hover:text-gray-900">Terms</a>
+        <a href="#" class="mx-1 hover:text-gray-900">Privacy</a>
+    </footer>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>

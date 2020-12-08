@@ -60,7 +60,8 @@ coverage.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-
+mediafiles/
+staticfiles/
 # Flask stuff:
 instance/
 .webassets-cache
@@ -127,3 +128,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.idea/
+
+# django-tailwind
+node_modules/
+theme/static

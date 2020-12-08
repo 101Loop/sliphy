@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}User - {{ object.username }}{% endblock %}
+
+{% block nav %}
+    {% include 'home/../nav.html' %}
+{% endblock nav %}
+
+{% block content %}
+<div class="flex items-center p-6 container mx-auto">
+          <h2>{{ object.username }}</h2>
+          {% if object.name %}
+            <p>{{ object.name }}</p>
+          {% endif %}
+
+    {% if object == request.user %}
+    <!-- Action buttons -->
+        <a href="{% url 'users:update' %}" role="button" class="block mt-4 lg:inline-block lg:mt-0 text-gray-600 hover:text-white mr-4">
+            My Info
+        </a>
+        <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
+        <!-- Your Stuff: Custom user template urls -->
+    <!-- End Action buttons -->
+    {% endif %}
+</div>
+
+{% endblock content %}
