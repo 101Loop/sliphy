@@ -1,34 +1,49 @@
 {% load static %}
 
-<nav class="flex justify-between p-6 container mx-auto sm:h-16 items-center print-hide">
-  <div class="w-full max-w-6xl relative mx-auto px-6">
-    <div class="py-2 flex flex-col sm:flex-row sm:items-center">
+<nav class="lg:px-16 px-6 bg-white flex flex-wrap items-center lg:py-0 py-2">
+  <div class="flex-1 flex justify-between items-center">
       <a href="{% url "home:home_page" %}" class="block py-1 flex items-center justify-center">
         <img class="h-10 w-10 mr-2" src="{% static "home/logo.svg" %}" alt="Sliphy">
         <h1 class="text-lg uppercase tracking-wider font-thin">Sliphy</h1>
       </a>
-      <div class="flex-grow"></div>
-
-      <div class="flex flex-row justify-around py-2">
-        {% if user.is_authenticated %}
-            <form class="inline" method="POST" action="{% url 'account_logout' %}">
-                {% csrf_token %}
-                <button class="mx-1 hover:underline" type="submit">Log Out</button>
-            </form>
+  </div>
+  <!-- Lines 11-22 is for hamburger icon -->
+  <!-- <label for="menu-toggle" class="pointer-cursor lg:hidden block">
+    <svg
+      class="fill-current text-gray-900"
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+    >
+      <title>menu</title>
+      <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+      </svg>
+  </label>
+  <input class="hidden" type="checkbox" id="menu-toggle" /> -->
+<!-- Remove the hidden class from line 25 to see the navlinks in mobile -->
+      <div class="lg:flex lg:items-center lg:w-auto w-full " id="menu">
+          {% if user.is_authenticated %}
+        <ul class="lg:flex items-center justify-between text-base text-gray-700 pt-4 lg:pt-0">
+          <li class="px-3">
+            <a href="{% url 'account_logout' %}" class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-teal-400">Logout</a>
+          </li>
+          
           {% if return_to_app %}
-            <div>
-              <a class="hover:underline font-light" href="{% url 'users:detail' user.username %}">Return to App</a>
-            </div>
+            <li class="px-3">
+              <a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-teal-400" href="{% url 'users:detail' user.username %}">Home</a>
+            </li>
+        </ul>
           {% endif %}
         {% else %}
-          <div class="px-3">
-            <a class="hover:underline font-light" href="{% url 'account_login' %}">Log In</a>
-          </div>
-          <div>
-            <a class="hover:underline font-light" href="{% url 'account_signup' %}">Register</a>
-          </div>
+        <ul class="lg:flex items-center justify-between text-base text-gray-700 pt-4 lg:pt-0">
+          <li class="px-3">
+            <a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-teal-400" href="{% url 'account_login' %}">Log In</a>
+          </li>
+          <li class="px-3">
+            <a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-teal-400" href="{% url 'account_signup' %}">Register</a>
+          </li>
+        </ul>
         {% endif %}
       </div>
-    </div>
-  </div>
 </nav>

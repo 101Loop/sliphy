@@ -14,6 +14,11 @@
 
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     {% block css %}
+        <style>
+            #menu-toggle:checked + #menu {
+        display: block;
+      }
+        </style>
     {% endblock css %}
 </head>
 
